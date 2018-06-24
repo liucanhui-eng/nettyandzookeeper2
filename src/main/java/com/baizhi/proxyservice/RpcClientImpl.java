@@ -14,6 +14,7 @@ import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 
 public class RpcClientImpl implements RpcClient {
+
     @Override
     public Result call(MethodInvokeMeta mim, HostAndPort hap) {
         System.out.println("min  "+mim+"\n"+"hostandpost   "+hap);
@@ -29,9 +30,12 @@ public class RpcClientImpl implements RpcClient {
         //接收返回结果
         final Result result = new Result();
         //初始化信道配置
+
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
+
             @Override
             protected void initChannel(SocketChannel socketChannel) throws Exception {
+
                 ChannelPipeline pipeline = socketChannel.pipeline();
                 pipeline.addLast(new LengthFieldPrepender(2));
                 pipeline.addLast(new ObjectMessageToMessageEncoder());
