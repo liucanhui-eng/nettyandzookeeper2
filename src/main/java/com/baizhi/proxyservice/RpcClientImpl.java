@@ -16,6 +16,7 @@ import io.netty.handler.codec.LengthFieldPrepender;
 public class RpcClientImpl implements RpcClient {
     @Override
     public Result call(MethodInvokeMeta mim, HostAndPort hap) {
+        System.out.println("min  "+mim+"\n"+"hostandpost   "+hap);
         final MethodInvokeMeta min = mim;
         //创建起动引导
         Bootstrap bootstrap = new Bootstrap();
@@ -66,7 +67,7 @@ public class RpcClientImpl implements RpcClient {
         //绑定端口启动服务
         try {
             System.out.println("端口"+hap.getPort());
-            ChannelFuture channelFuture = bootstrap.connect("localhost", 8990).sync();
+            ChannelFuture channelFuture = bootstrap.connect("localhost", hap.getPort()).sync();
             //关闭socketChannel
             channelFuture.channel().closeFuture().sync();
         } catch (InterruptedException e) {

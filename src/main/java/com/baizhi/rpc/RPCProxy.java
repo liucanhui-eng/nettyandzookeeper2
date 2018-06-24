@@ -49,6 +49,7 @@ public class RPCProxy<T> implements InvocationHandler {
         mim.setParameterTypes(method.getParameterTypes());
         HostAndPort hostAndPort=null;//随机从hostAndPorts获取一个做远程调度
         int index = new Random().nextInt(hostAndPorts.size());
+        System.out.println("可选服务器个数： "+hostAndPorts.size()+"\n"+"已选择的服务器  "+hostAndPorts.get(index).getPort());
         hostAndPort=hostAndPorts.get(index);
         Result result = rpcClient.call(mim, hostAndPort);
         System.out.println("代理类 min对象   "+mim);
