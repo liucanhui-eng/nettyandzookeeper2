@@ -31,6 +31,7 @@ public class RpcClientImpl implements RpcClient {
         final Result result = new Result();
         //初始化信道配置
 
+
         bootstrap.handler(new ChannelInitializer<SocketChannel>() {
 
             @Override
